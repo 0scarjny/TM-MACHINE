@@ -1,4 +1,5 @@
 
+
 /* ===================================================================== *
  *                                                                       *
  * BACKEND SYSTEM                                                        *
@@ -45,7 +46,7 @@
     boolean LCDML_BACK_loop(LCDML_BACKEND_RAINBOW)
     {    
     pixels.Update(); 
-     if (digitalRead(18) == LOW) // Button #2 pressed
+    /* if (digitalRead(18) == LOW) // Button #2 pressed
     {
         // Switch to alternating color wipes on Rings1 and 2
         
@@ -64,8 +65,8 @@
         pixels.Interval = min(10, pixels.Interval);
         // And update tbe stick
         
-    }
-  g_lcdml_initscreen = millis(); // reset initscreen timer
+    }*/
+ // g_lcdml_initscreen = millis(); // reset initscreen timer
 }  
     
     
