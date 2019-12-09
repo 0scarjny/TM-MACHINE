@@ -494,18 +494,18 @@ void LCDML_CONTROL_loop()
 	#define _LCDML_CONTROL_analog_pinx A0
 	#define _LCDML_CONTROL_analog_piny A1
 	#define _LCDML_CONTROL_digitalread 8 //don't work with u8glib
-  #define _LCDML_CONTROL_digital_quit 18
+  #define _LCDML_CONTROL_digital_quit 9
 
 
 	// when you did not use a button set the value to zero
-	#define _LCDML_CONTROL_analog_up_min 612 // Button Up
+	#define _LCDML_CONTROL_analog_up_min 700 // Button Up
 	#define _LCDML_CONTROL_analog_up_max 1023
 	#define _LCDML_CONTROL_analog_down_min 0 // Button Down
-	#define _LCDML_CONTROL_analog_down_max 412
-	#define _LCDML_CONTROL_analog_left_min 612 // Button Left
+	#define _LCDML_CONTROL_analog_down_max 350
+	#define _LCDML_CONTROL_analog_left_min 700 // Button Left
 	#define _LCDML_CONTROL_analog_left_max 1023
 	#define _LCDML_CONTROL_analog_right_min 0 // Button Right
-	#define _LCDML_CONTROL_analog_right_max 412
+	#define _LCDML_CONTROL_analog_right_max 350
 // *********************************************************************
 // setup
 void LCDML_CONTROL_setup()
