@@ -80,25 +80,19 @@ void LCDML_DISP_loop_end(LCDML_FUNC_initscreen)
 void setColor()
 // **********************************************************************
 {
-  redColor = random(20, 200);
-  greenColor = random(20,200);
-  blueColor = random(20, 200);
-  redColor2 = random(0, 255);
-  greenColor2 = random(0,255);
-  blueColor2 = random(0, 255);
+  redColor = random(20, 225);
+  greenColor = random(20,225);
+  blueColor = random(20, 225);
+  
 
 
 
   for (int i=0; i < NUMPIXELS; i++) {
     // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
     pixels.setPixelColor(i, pixels.Color(redColor, greenColor, blueColor));
-    //pixels.setPixelColor(i-, pixels.Color(redColor2, greenColor2, blueColor2));
     // This sends the updated pixel color to the hardware.
     pixels.show();
 
-    // Delay for a period of time (in milliseconds).
-    //delay(delayval);
- 
   }
 
 }
@@ -111,10 +105,10 @@ void LCDML_DISP_setup(LCDML_FUNC_initscreen)
   LCDML_DISP_triggerMenu(1000); // set trigger for this function to 1000 millisecounds
  
   lcd.setCursor(0, 0);
-  lcd.print("Cocktails fait:");
+  lcd.print("Cocktails faits:");
   lcd.setCursor(0, 1);
   lcd.print(total_cocktail);
-  LCDML_BACK_start(LCDML_BACKEND_RAINBOW);
+  //LCDML_BACK_start(LCDML_BACKEND_RAINBOW);
 }
 // uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 void LCDML_DISP_loop(LCDML_FUNC_initscreen) 
@@ -122,19 +116,14 @@ void LCDML_DISP_loop(LCDML_FUNC_initscreen)
  if(LCDML_BUTTON_checkAny()){
   LCDML_DISP_funcend();
  }
-
+g_lcdml_initscreen = millis(); // reset initscreen timer
 }
 
 void LCDML_DISP_loop_end(LCDML_FUNC_initscreen) 
 {  
   // this functions is ever called when a DISP function is quit
-  // you can here reset some global vars or do nothing
-  pixels.clear();
-  pixels.show();
   LCDML.goRoot(); // go to root element (first element of this menu with id=0)
-  LCDML_BACK_stopStable(LCDML_BACKEND_RAINBOW);
-  //pixels.clear();
-  //pixels.show();
+  
 }
 
 
@@ -143,27 +132,22 @@ void LCDML_DISP_setup(LCDML_FUNC_BALANCE)
 // *********************************************************************
 {
   // setup function
- 
-  
-  
+
 }
-// uint8_t gHue = 0; // rotating "base color" used by many of the patterns
+
 void LCDML_DISP_loop(LCDML_FUNC_BALANCE) 
 {
 lcd.setCursor(0, 0);
 lcd.print("Masse:");
 lcd.setCursor(0, 1);
-lcd.print(paverage());
-if (paverage()<100){
-  lcd.print("          ");
-  lcd.setCursor(4, 1);
-}
-else {
-  lcd.print("          ");
-  lcd.setCursor(5, 1);
-}
+lcd.print("          ");  
+
+lcd.setCursor(0, 1);
+
+lcd.print(paverage(),1);
 lcd.print("g");
-delay(50);
+
+delay(100);
 
 }
 
@@ -174,9 +158,306 @@ void LCDML_DISP_loop_end(LCDML_FUNC_BALANCE)
   
 }
 
+// *********************************************************************
+void LCDML_DISP_setup(LCDML_FUNC_CLEAN_RECUP)
+// *********************************************************************
+{     
+      
+      
+      
+      lcd.setCursor(0, 0);
+      lcd.print("Temps restant:");
+      lcd.setCursor(0, 1);
+      lcd.print(nombre);
+      lcd.setCursor(3, 1);
+      lcd.print("secondes");
 
+      digitalWrite(PUMP1_IN1, HIGH);       
+      digitalWrite(PUMP1_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP2_IN1, HIGH);       
+      digitalWrite(PUMP2_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP3_IN1, HIGH);       
+      digitalWrite(PUMP3_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP4_IN1, HIGH);       
+      digitalWrite(PUMP4_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP5_IN1, HIGH);       
+      digitalWrite(PUMP5_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP6_IN1, HIGH); 
+      digitalWrite(PUMP6_IN2, LOW) ;
+      delay(50);
+      
+}
 
+void LCDML_DISP_loop(LCDML_FUNC_CLEAN_RECUP) 
+{
+      
+    unsigned long currentMillis = millis();
 
+    if (currentMillis - previousMillis >= interval) {
+    nombre--;
+    Serial.println(nombre);   
+    
+    lcd.setCursor(0, 1);
+    lcd.print("  ");
+    lcd.setCursor(0, 1);
+    lcd.print(nombre);
+   
+    if (nombre ==20){              // quand le compteur atteint 10 secondes
+  
+      digitalWrite(PUMP1_IN1, LOW); // Pompes OFF      
+      digitalWrite(PUMP1_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP2_IN1, LOW);       
+      digitalWrite(PUMP2_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP3_IN1, LOW);       
+      digitalWrite(PUMP3_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP4_IN1, LOW);       
+      digitalWrite(PUMP4_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP5_IN1, LOW);       
+      digitalWrite(PUMP5_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP6_IN1, HIGH); // Pompes ON      
+      digitalWrite(PUMP6_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP7_IN1, HIGH);       
+      digitalWrite(PUMP7_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP8_IN1, HIGH);       
+      digitalWrite(PUMP8_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP9_IN1, HIGH);       
+      digitalWrite(PUMP9_IN2, LOW) ;
+      delay(50);
+      digitalWrite(PUMP10_IN1, HIGH);       
+      digitalWrite(PUMP10_IN2, LOW) ;
+      }
+
+   if (nombre ==10){              // quand le compteur atteint 20 secondes
+ 
+      digitalWrite(PUMP6_IN1, LOW);  // Pompes OFF     
+      digitalWrite(PUMP6_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP7_IN1, LOW);       
+      digitalWrite(PUMP7_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP8_IN1, LOW);       
+      digitalWrite(PUMP8_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP9_IN1, LOW);       
+      digitalWrite(PUMP9_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP10_IN1, LOW);       
+      digitalWrite(PUMP10_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP11_IN1, HIGH); //Pompes ON      
+      digitalWrite(PUMP11_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP12_IN1, HIGH);       
+      digitalWrite(PUMP12_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP13_IN1, HIGH);       
+      digitalWrite(PUMP13_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP14_IN1, HIGH);       
+      digitalWrite(PUMP14_IN2, LOW);
+      }
+         
+    if (nombre ==0){              // quand le compteur a fini
+      
+       lcd.clear();
+       lcd.setCursor(0, 0);
+       lcd.print("NETTOYAGE");
+       lcd.setCursor(0, 1);
+       lcd.print("TERMINE");
+       
+      
+      digitalWrite(PUMP11_IN1, LOW);  // Pompes OFF     
+      digitalWrite(PUMP11_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP12_IN1, LOW);       
+      digitalWrite(PUMP12_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP13_IN1, LOW);       
+      digitalWrite(PUMP13_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP14_IN1, LOW);       
+      digitalWrite(PUMP14_IN2, LOW);
+       
+      delay(3000);
+      LCDML_DISP_funcend(); 
+    }
+    previousMillis = currentMillis; // remet l'intervale écoulé a 0
+    }
+   
+      
+      pixels.Update();    
+}
+
+void LCDML_DISP_loop_end(LCDML_FUNC_CLEAN_RECUP) 
+{  
+  // this functions is ever called when a DISP function is quit
+  // you can here reset some global vars or do nothing
+  nombre =30;
+}
+
+    
+// *********************************************************************
+void LCDML_DISP_setup(LCDML_FUNC_CLEAN_EAU)
+// *********************************************************************
+{     
+      
+      
+      
+      lcd.setCursor(0, 0);
+      lcd.print("Temps restant:");
+      lcd.setCursor(0, 1);
+      lcd.print(nombre);
+      lcd.setCursor(3, 1);
+      lcd.print("secondes");
+
+      digitalWrite(PUMP1_IN1, LOW);       
+      digitalWrite(PUMP1_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP2_IN1, LOW);       
+      digitalWrite(PUMP2_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP3_IN1, LOW);       
+      digitalWrite(PUMP3_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP4_IN1, LOW);       
+      digitalWrite(PUMP4_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP5_IN1, LOW);       
+      digitalWrite(PUMP5_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP6_IN1, LOW); 
+      digitalWrite(PUMP6_IN2, HIGH);
+      delay(50);
+      
+}
+
+void LCDML_DISP_loop(LCDML_FUNC_CLEAN_EAU) 
+{
+      
+    unsigned long currentMillis = millis();
+
+    if (currentMillis - previousMillis >= interval) {
+    nombre--;
+    Serial.println(nombre);   
+    
+    lcd.setCursor(0, 1);
+    lcd.print("  ");
+    lcd.setCursor(0, 1);
+    lcd.print(nombre);
+   
+    if (nombre ==20){              // quand le compteur atteint 10 secondes
+  
+      digitalWrite(PUMP1_IN1, LOW); // Pompes OFF      
+      digitalWrite(PUMP1_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP2_IN1, LOW);       
+      digitalWrite(PUMP2_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP3_IN1, LOW);       
+      digitalWrite(PUMP3_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP4_IN1, LOW);       
+      digitalWrite(PUMP4_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP5_IN1, LOW);       
+      digitalWrite(PUMP5_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP6_IN1, LOW); // Pompes ON      
+      digitalWrite(PUMP6_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP7_IN1, LOW);       
+      digitalWrite(PUMP7_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP8_IN1, LOW);       
+      digitalWrite(PUMP8_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP9_IN1, LOW);       
+      digitalWrite(PUMP9_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP10_IN1, LOW);       
+      digitalWrite(PUMP10_IN2, HIGH);
+      }
+
+   if (nombre ==10){              // quand le compteur atteint 20 secondes
+ 
+      digitalWrite(PUMP6_IN1, LOW);  // Pompes OFF     
+      digitalWrite(PUMP6_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP7_IN1, LOW);       
+      digitalWrite(PUMP7_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP8_IN1, LOW);       
+      digitalWrite(PUMP8_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP9_IN1, LOW);       
+      digitalWrite(PUMP9_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP10_IN1, LOW);       
+      digitalWrite(PUMP10_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP11_IN1, LOW); //Pompes ON      
+      digitalWrite(PUMP11_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP12_IN1, LOW);       
+      digitalWrite(PUMP12_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP13_IN1, LOW);       
+      digitalWrite(PUMP13_IN2, HIGH);
+      delay(50);
+      digitalWrite(PUMP14_IN1, LOW);       
+      digitalWrite(PUMP14_IN2, HIGH);
+      }
+         
+    if (nombre ==0){              // quand le compteur a fini
+      
+       lcd.clear();
+       lcd.setCursor(0, 0);
+       lcd.print("NETTOYAGE");
+       lcd.setCursor(0, 1);
+       lcd.print("TERMINE");
+       
+      
+      digitalWrite(PUMP11_IN1, LOW);  // Pompes OFF     
+      digitalWrite(PUMP11_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP12_IN1, LOW);       
+      digitalWrite(PUMP12_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP13_IN1, LOW);       
+      digitalWrite(PUMP13_IN2, LOW);
+      delay(50);
+      digitalWrite(PUMP14_IN1, LOW);       
+      digitalWrite(PUMP14_IN2, LOW);
+       
+      delay(3000);
+      LCDML_DISP_funcend(); 
+    }
+    previousMillis = currentMillis; // remet l'intervale écoulé a 0
+    }
+   
+      
+      pixels.Update();    
+}
+
+void LCDML_DISP_loop_end(LCDML_FUNC_CLEAN_EAU) 
+{  
+  // this functions is ever called when a DISP function is quit
+  // you can here reset some global vars or do nothing
+  nombre =30;
+}
 
 // *********************************************************************
 float paverage() 
@@ -202,12 +483,10 @@ void setColorred()
     // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
     pixels.setPixelColor(i, pixels.Color(255, 0, 0));
 
-    // This sends the updated pixel color to the hardware.
-   // pixels.show();
-
-    // Delay for a period of time (in milliseconds).
-    //delay(15);
+    
+   
   }
+      // This sends the updated pixel color to the hardware.
       pixels.show();
 }
 // **********************************************************************
@@ -216,12 +495,11 @@ void boisson_prete()
 {
       Serial.println("Fermé"); 
       total_cocktail++;     
-      detection=digitalRead(capteur); // on lit la broche capteur
+      duration = sonar.ping();
+      distance = (duration / 2) * 0.0343;
       // la sortie OUT du capteur est active sur niveau bas
-      while (detection==0) { // objet détecté = niveau 0 sur OUT capteur
+      while (distance<distance_verre) { // objet détecté = niveau 0 sur OUT capteur
 
-
-      detection=digitalRead(capteur);
       
       lcd.clear();      
       lcd.setCursor(0, 0);
@@ -233,6 +511,11 @@ void boisson_prete()
       pixels.clear();
       pixels.show();
       delay(50);
+
+      duration = sonar.ping();
+      distance = (duration / 2) * 0.0343;
+      
+      g_lcdml_initscreen = millis(); // reset initscreen timer
       }
 }
 
@@ -242,7 +525,7 @@ void menu_choix()
 {
   if (LCDML_BUTTON_checkAny()) // check if any button is pressed (enter, up, down, left, right)
   {
-    if (LCDML_BUTTON_checkLeft()) 
+    if (LCDML_BUTTON_checkLeft ()) 
       {
       LCDML_BUTTON_resetLeft(); // reset  
       volume = volume - 5;
@@ -295,6 +578,7 @@ void menu_choix()
          lcd.print("ml");        
        }
   }
+ 
 }
 
 //****************************************************************************
