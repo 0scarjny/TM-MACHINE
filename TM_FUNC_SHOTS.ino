@@ -44,13 +44,16 @@ void LCDML_DISP_loop(LCDML_FUNC_VODKA)
       lcd.setCursor(0, 0);
       lcd.print(volume);
       lcd.setCursor(3, 0);
-      lcd.print("ml de vodka");     
+      lcd.print("ml de vodka");
+      
+           
       float verre1=paverage();
       pixels.Update();
-      while(paverage()-verre1 < volume*rho_vodka && paverage()>poid_minimal ){
       
+      while(paverage()-verre1 < volume*rho_vodka && paverage()>poid_minimal ){
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, HIGH);
+     
       Serial.println("Ouvert1");
       pixels.Update();
     
@@ -124,7 +127,7 @@ void LCDML_DISP_loop(LCDML_FUNC_GIN)
       lcd.setCursor(0, 0);
       lcd.print(volume);
       lcd.setCursor(3, 0);
-      lcd.print("ml de gin");
+      lcd.print("ml de Gin");
             
       float verre1=paverage();
       pixels.Update();
