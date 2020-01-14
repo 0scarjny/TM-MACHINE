@@ -54,31 +54,42 @@ void LCDML_DISP_loop(LCDML_FUNC_BACARDI)
       digitalWrite(PUMP11_IN2, HIGH);
       Serial.println("Ouvert");
       pixels.Update();
+      lcd.setCursor(0, 2);
+      lcd.print("Grenadine");
     
       }
 
       digitalWrite(PUMP11_IN1, LOW);       
       digitalWrite(PUMP11_IN2, LOW);
       Serial.println("Fermé1");
-      
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
+
+      pixels.TheaterChase(pixels.Color(240,40,140),pixels.Color(200,21,16), 100);
       while(paverage()-verre1-((3*volume/15)*rho_grenadine) < (9*volume/15)*rho_rhum_blanc && paverage()>poid_minimal){
       
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Rhum blanc");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, LOW);       
-
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(240,40,140),pixels.Color(200,21,16), 100);
       while(paverage()-verre1-((3*volume/15)*rho_grenadine)-((9*volume/15)*rho_rhum_blanc) < 4*volume/15*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de  citron");
       Serial.println("Ouvert3");
       pixels.Update();
     
@@ -86,7 +97,8 @@ void LCDML_DISP_loop(LCDML_FUNC_BACARDI)
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
-      
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
 
       Serial.println("Fermé3"); 
            
@@ -109,7 +121,7 @@ void LCDML_DISP_loop_end(LCDML_FUNC_BACARDI)
   }
 
 // *********************************************************************
-void LCDML_DISP_setup(TM_FUNC_TEQUILA_SUNRISE)
+void LCDML_DISP_setup(FUNC_TEQUILA_SUNRISE)
 
 // *********************************************************************
 { 
@@ -132,7 +144,7 @@ void LCDML_DISP_setup(TM_FUNC_TEQUILA_SUNRISE)
        delay(involontaire);         // pour éviter une sélection involontaire
   
 }
-void LCDML_DISP_loop(TM_FUNC_TEQUILA_SUNRISE)
+void LCDML_DISP_loop(FUNC_TEQUILA_SUNRISE)
 {
  menu_choix();
  
@@ -155,9 +167,9 @@ void LCDML_DISP_loop(TM_FUNC_TEQUILA_SUNRISE)
       lcd.setCursor(0, 0);
       lcd.print(volume);
       lcd.setCursor(3, 0);
-      lcd.print("ml de Tequila ");
+      lcd.print("ml de");
       lcd.setCursor(0, 1); 
-      lcd.print("Sunrise");
+      lcd.print("Tequila Sunrise");
                  
       float verre1=paverage();
       pixels.Update();
@@ -166,40 +178,53 @@ void LCDML_DISP_loop(TM_FUNC_TEQUILA_SUNRISE)
       digitalWrite(PUMP9_IN1, LOW);       
       digitalWrite(PUMP9_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus d'orange");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP9_IN1, LOW);      
       digitalWrite(PUMP9_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(233,60,16),pixels.Color(230,230,0), 100);
       while(paverage()-verre1-((6*volume/10)*rho_orange) < (3*volume/10)*rho_tequila && paverage()>poid_minimal){
       
       digitalWrite(PUMP6_IN1, LOW);
       digitalWrite(PUMP6_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Tequila");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP6_IN1, LOW);
-      digitalWrite(PUMP6_IN2, LOW);       
+      digitalWrite(PUMP6_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");       
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(233,60,16),pixels.Color(230,230,0), 100);
       while(paverage()-verre1-((6*volume/10)*rho_orange)-((3*volume/10)*rho_tequila) < volume/10*rho_grenadine && paverage()>poid_minimal){
       
       digitalWrite(PUMP11_IN1, LOW);       
       digitalWrite(PUMP11_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Grenadine");
+      
       Serial.println("Ouvert3");
-      ;
     
       }
 
       digitalWrite(PUMP11_IN1, LOW);       
       digitalWrite(PUMP11_IN2, LOW);
-      
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
 
       Serial.println("Fermé3"); 
            
@@ -209,7 +234,7 @@ void LCDML_DISP_loop(TM_FUNC_TEQUILA_SUNRISE)
       }
       }
 
-void LCDML_DISP_loop_end(TM_FUNC_TEQUILA_SUNRISE) 
+void LCDML_DISP_loop_end(FUNC_TEQUILA_SUNRISE) 
 {
   // this functions is ever called when a DISP function is quit
   // you can here reset some global vars or do nothing      
@@ -261,7 +286,7 @@ void LCDML_DISP_loop(LCDML_FUNC_MARGARITA)
       distance = (duration / 2) * 0.0343;
       
       } 
-      pixels.TheaterChase(pixels.Color(0,200,20),pixels.Color(255,255,255), 100);
+      pixels.TheaterChase(pixels.Color(0,200,20),pixels.Color(255,55,255), 100);
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(volume);
@@ -276,40 +301,53 @@ void LCDML_DISP_loop(LCDML_FUNC_MARGARITA)
       digitalWrite(PUMP6_IN1, LOW);
       digitalWrite(PUMP6_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Tequila");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP6_IN1, LOW);
       digitalWrite(PUMP6_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(0,200,20),pixels.Color(255,55,255), 100);
       while(paverage()-verre1-((7*volume/14)*rho_tequila) < (4*volume/14)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");       
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(0,200,20),pixels.Color(255,55,255), 100);
       while(paverage()-verre1-((7*volume/14)*rho_tequila)-((4*volume/14)*rho_cointreau) < (3*volume/14)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
-      
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
 
       Serial.println("Fermé3"); 
            
@@ -344,7 +382,7 @@ void LCDML_DISP_setup(LCDML_FUNC_COSMOPOLITAN)
        lcd.setCursor(0, 0);
        lcd.print("COSMOPOLITAN:");
        lcd.setCursor(0, 1);
-       lcd.print("8x Vodka,6x Cramberry");
+       lcd.print("8x Vodka,6x Cranb.");
        lcd.setCursor(0, 2);
        lcd.print("3x Cointreau,3x Lime");
        lcd.setCursor(0, 3);
@@ -381,7 +419,7 @@ void LCDML_DISP_loop(LCDML_FUNC_COSMOPOLITAN)
       lcd.setCursor(3, 0);
       lcd.print("ml de ");
       lcd.setCursor(0, 1);
-      lcd.print("COSMOPOLITAN ");
+      lcd.print("Cosmopolitan");
 
                  
       float verre1=paverage();
@@ -391,52 +429,71 @@ void LCDML_DISP_loop(LCDML_FUNC_COSMOPOLITAN)
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Vodka");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(255,86,245),pixels.Color(255,10,16), 100);
       while(paverage()-verre1-((8*volume/20)*rho_vodka) < (3*volume/20)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW); 
+      lcd.setCursor(0, 2);
+      lcd.print("              ");      
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,86,245),pixels.Color(255,10,16), 100);
       while(paverage()-verre1-((8*volume/20)*rho_vodka)-((3*volume/20)*rho_cointreau) < (3*volume/20)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé3");
 
+      pixels.TheaterChase(pixels.Color(255,86,245),pixels.Color(255,10,16), 100);
       while(paverage()-verre1-((8*volume/20)*rho_vodka)-((3*volume/20)*rho_cointreau)-((3*volume/20)*rho_lime) < (6*volume/20)*rho_cranberry && paverage()>poid_minimal){
       
       digitalWrite(PUMP8_IN1, LOW);       
       digitalWrite(PUMP8_IN2, HIGH);
       Serial.println("Ouvert4");
+      lcd.setCursor(0, 2);
+      lcd.print("Cranberry");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP8_IN1, LOW);       
       digitalWrite(PUMP8_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé4");
            
       boisson_prete();
@@ -522,7 +579,8 @@ void LCDML_DISP_loop(LCDML_FUNC_SCREWDRIVER)
       Serial.println("Fermé1");
       lcd.setCursor(0, 2);
       lcd.print("              ");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(100,240,0), 100);
       while(paverage()-verre1-((volume/3)*rho_vodka) < (2*volume/3)*rho_orange && paverage()>poid_minimal){
       
       digitalWrite(PUMP9_IN1, LOW);       
@@ -571,7 +629,7 @@ void LCDML_DISP_setup(LCDML_FUNC_SEX_ON_THE_BEACH)
        lcd.setCursor(0, 0);
        lcd.print("Sex On The Beach:");
        lcd.setCursor(0, 1);
-       lcd.print("2x Vodka,2x Cramberry");
+       lcd.print("2x Vodka,2x Cramber.");
        lcd.setCursor(0, 2);
        lcd.print("2x Orange,1x Peche");
        lcd.setCursor(0, 3);
@@ -618,52 +676,71 @@ void LCDML_DISP_loop(LCDML_FUNC_SEX_ON_THE_BEACH)
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Vodka");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("              ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(255,60,40), 100);
       while(paverage()-verre1-((2*volume/7)*rho_vodka) < (1*volume/7)*rho_liqueur_peche && paverage()>poid_minimal){
       
       digitalWrite(PUMP13_IN1, LOW);       
       digitalWrite(PUMP13_IN2, HIGH);
       Serial.println("Ouvert2");
+      lcd.setCursor(0, 2);
+      lcd.print("Liqueur de peche");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP13_IN1, LOW);       
-      digitalWrite(PUMP13_IN2, HIGH);       
+      digitalWrite(PUMP13_IN2, LOW); 
+      lcd.setCursor(0, 2);
+      lcd.print("                  ");      
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(255,60,40), 100);
       while(paverage()-verre1-((2*volume/7)*rho_vodka)-((2*volume/7)*rho_liqueur_peche) < (2*volume/7)*rho_orange && paverage()>poid_minimal){
       
       digitalWrite(PUMP9_IN1, LOW);       
       digitalWrite(PUMP9_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus d'orange");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP9_IN1, LOW);       
       digitalWrite(PUMP9_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                ");
       Serial.println("Fermé3");
 
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(255,60,40), 100);
       while(paverage()-verre1-((2*volume/7)*rho_vodka)-((2*volume/7)*rho_liqueur_peche)-((2*volume/7)*rho_orange) < (2*volume/7)*rho_cranberry && paverage()>poid_minimal){
       
       digitalWrite(PUMP8_IN1, LOW);       
       digitalWrite(PUMP8_IN2, HIGH);
       Serial.println("Ouvert4");
+      lcd.setCursor(0, 2);
+      lcd.print("Cranberry");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP8_IN1, LOW);       
       digitalWrite(PUMP8_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé4");
            
       boisson_prete();
@@ -731,9 +808,9 @@ void LCDML_DISP_loop(LCDML_FUNC_WHITE_LADY)
       lcd.setCursor(0, 0);
       lcd.print(volume);
       lcd.setCursor(3, 0);
-      lcd.print("ml de White ");
+      lcd.print("ml de");
       lcd.setCursor(0, 1);
-      lcd.print("Lady ");
+      lcd.print("White Lady ");
                  
       float verre1=paverage();
       pixels.Update();
@@ -742,6 +819,8 @@ void LCDML_DISP_loop(LCDML_FUNC_WHITE_LADY)
       digitalWrite(PUMP2_IN1, LOW);
       digitalWrite(PUMP2_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Gin");
       pixels.Update();
     
       }
@@ -749,32 +828,43 @@ void LCDML_DISP_loop(LCDML_FUNC_WHITE_LADY)
       digitalWrite(PUMP2_IN1, LOW);
       digitalWrite(PUMP2_IN2, LOW);
       Serial.println("Fermé1");
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       
       while(paverage()-verre1-((4*volume/9)*rho_gin) < (3*volume/9)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW); 
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");      
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,255),pixels.Color(90,90,90), 100);
       while(paverage()-verre1-((4*volume/9)*rho_gin)-((3*volume/9)*rho_cointreau) < (2*volume/9)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       
 
       Serial.println("Fermé3"); 
@@ -845,11 +935,9 @@ void LCDML_DISP_loop(LCDML_FUNC_KAMIKAZE)
       lcd.setCursor(0, 0);
       lcd.print(volume);
       lcd.setCursor(3, 0);
-      lcd.print("ml de  ");
-      lcd.setCursor(3, 1);
-      lcd.print("Kamikaze ");
-      lcd.setCursor(0, 2);
-      lcd.print("en preparation ");
+      lcd.print("ml de Kamikaze");
+      
+      
                  
       float verre1=paverage();
       pixels.Update();
@@ -858,39 +946,53 @@ void LCDML_DISP_loop(LCDML_FUNC_KAMIKAZE)
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Vodka");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(135,190,165),pixels.Color(40,240,40), 100); 
       while(paverage()-verre1-((volume/3)*rho_vodka) < (volume/3)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW); 
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");      
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(135,190,165),pixels.Color(40,240,40), 100);
       while(paverage()-verre1-((volume/3)*rho_vodka)-((volume/3)*rho_cointreau) < (volume/3)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       
 
       Serial.println("Fermé3"); 
@@ -933,7 +1035,7 @@ void LCDML_DISP_setup(LCDML_FUNC_CUBA_LIBRE)
        lcd.print("Volume:");
        lcd.setCursor(8, 3);
        lcd.print(volume);
-       lcd.setCursor(10, 3);
+       lcd.setCursor(11, 3);
        lcd.print("ml");
 
        delay(involontaire);         // pour éviter une sélection involontaire
@@ -956,16 +1058,15 @@ void LCDML_DISP_loop(LCDML_FUNC_CUBA_LIBRE)
       distance = (duration / 2) * 0.0343;
       
       } 
-      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(50,50,50), 100);
+      pixels.TheaterChase(pixels.Color(255,150,0),pixels.Color(170,50,50), 100);
       lcd.clear();
       lcd.setCursor(0, 0);
       lcd.print(volume);
       lcd.setCursor(3, 0);
       lcd.print("ml de  ");
-      lcd.setCursor(3, 1);
+      lcd.setCursor(0, 1);
       lcd.print("Cuba Libre ");
-      lcd.setCursor(0, 2);
-      lcd.print("en preparation ");
+      
                  
       float verre1=paverage();
       pixels.Update();
@@ -974,32 +1075,44 @@ void LCDML_DISP_loop(LCDML_FUNC_CUBA_LIBRE)
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 3);
+      lcd.print("Rhum blanc");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, LOW);
+      lcd.setCursor(0, 3);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(255,150,0),pixels.Color(170,50,50), 100);
       while(paverage()-verre1-((5*volume/18)*rho_rhum_blanc) < (volume/18)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
+      lcd.setCursor(0, 3);
+      lcd.print("Jus de citron");
       Serial.println("Ouvert");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
-      digitalWrite(PUMP12_IN2, LOW);       
+      digitalWrite(PUMP12_IN2, LOW); 
+      lcd.setCursor(0, 3);
+      lcd.print("                 ");      
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,150,0),pixels.Color(170,50,50), 100);
       while(paverage()-verre1-((5*volume/18)*rho_rhum_blanc)-((volume/18)*rho_lime) < (12*volume/18)*rho_cola && paverage()>poid_minimal){
       
       digitalWrite(PUMP7_IN1, LOW);       
       digitalWrite(PUMP7_IN2, HIGH);
+      lcd.setCursor(0, 3);
+      lcd.print("Coca-Cola");
       Serial.println("Ouvert3");
       pixels.Update();
     
@@ -1007,6 +1120,8 @@ void LCDML_DISP_loop(LCDML_FUNC_CUBA_LIBRE)
 
       digitalWrite(PUMP7_IN1, LOW);       
       digitalWrite(PUMP7_IN2, LOW);
+      lcd.setCursor(0, 3);
+      lcd.print("                 ");
       
 
       Serial.println("Fermé3"); 
@@ -1050,7 +1165,7 @@ void LCDML_DISP_setup(LCDML_FUNC_LONG_ISLAND_TEA)
        lcd.print("Volume:");
        lcd.setCursor(8, 3);
        lcd.print(volume);
-       lcd.setCursor(10, 3);
+       lcd.setCursor(11, 3);
        lcd.print("ml");
 
        delay(involontaire);         // pour éviter une sélection involontaire
@@ -1082,101 +1197,136 @@ void LCDML_DISP_loop(LCDML_FUNC_LONG_ISLAND_TEA)
       lcd.print("ml de  ");
       lcd.setCursor(0, 1);
       lcd.print("Long Island Tea");
-      lcd.setCursor(0, 2);
-      lcd.print("en preparation ");
+      ;
                  
       float verre1=paverage();
       pixels.Update();
+
+      pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
       while(paverage()-verre1 < (3*volume/23)*rho_rhum_blanc && paverage()>poid_minimal){
       
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Rhum blanc");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
       while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc) < (3*volume/23)*rho_gin && paverage()>poid_minimal){
       
       digitalWrite(PUMP2_IN1, LOW);
       digitalWrite(PUMP2_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Gin");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP2_IN1, LOW);
-      digitalWrite(PUMP2_IN2, LOW);       
+      digitalWrite(PUMP2_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");       
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
       while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin) < (3*volume/23)*rho_vodka && paverage()>poid_minimal){
       
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Vodka");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé3"); 
 
+ pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
  while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka) < (3*volume/23)*rho_cointreau && paverage()>poid_minimal) {
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
       Serial.println("Ouvert4");
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé4");
 
- while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka)-((3*volume/23)*rho_cointreau) < (3*volume/23)*rho_tequila && paverage()>poid_minimal) {
+      pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
+      while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka)-((3*volume/23)*rho_cointreau) < (3*volume/23)*rho_tequila && paverage()>poid_minimal) {
       
       digitalWrite(PUMP6_IN1, LOW);
       digitalWrite(PUMP6_IN2, HIGH);
       Serial.println("Ouvert5");
+      lcd.setCursor(0, 2);
+      lcd.print("Tequila");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP6_IN1, LOW);
       digitalWrite(PUMP6_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé5"); 
 
-while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka)-((3*volume/23)*rho_cointreau) -((3*volume/23)*rho_tequila)<(2*volume/23)*rho_lime && paverage()>poid_minimal) {
+      pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
+      while(paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka)-((3*volume/23)*rho_cointreau) -((3*volume/23)*rho_tequila)<(2*volume/23)*rho_lime && paverage()>poid_minimal) {
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert6");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé6"); 
 
-while( paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka)-((3*volume/23)*rho_cointreau) -((3*volume/23)*rho_tequila)-((2*volume/23)*rho_lime) < (6*volume/23)*rho_cola && paverage()>poid_minimal) {
+      pixels.TheaterChase(pixels.Color(255,165,40),pixels.Color(240,160,200), 100);
+      while( paverage()-verre1-((3*volume/23)*rho_rhum_blanc)-((3*volume/23)*rho_gin)-((3*volume/23)*rho_vodka)-((3*volume/23)*rho_cointreau) -((3*volume/23)*rho_tequila)-((2*volume/23)*rho_lime) < (6*volume/23)*rho_cola && paverage()>poid_minimal) {
       
       digitalWrite(PUMP7_IN1, LOW);       
       digitalWrite(PUMP7_IN2, HIGH);
       Serial.println("Ouvert7");
+      lcd.setCursor(0, 2);
+      lcd.print("Coca-Cola");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP7_IN1, LOW);       
       digitalWrite(PUMP7_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé7");
       
       boisson_prete();
@@ -1246,10 +1396,9 @@ void LCDML_DISP_loop(LCDML_FUNC_PARADISE)
       lcd.print(volume);
       lcd.setCursor(3, 0);
       lcd.print("ml de  ");
-      lcd.setCursor(3, 1);
+      lcd.setCursor(0, 1);
       lcd.print("Paradise ");
-      lcd.setCursor(0, 2);
-      lcd.print("en preparation ");
+      
                  
       float verre1=paverage();
       pixels.Update();
@@ -1258,40 +1407,53 @@ void LCDML_DISP_loop(LCDML_FUNC_PARADISE)
       digitalWrite(PUMP2_IN1, LOW);
       digitalWrite(PUMP2_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Gin");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP2_IN1, LOW);
       digitalWrite(PUMP2_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(0,165,200), 100);
       while(paverage()-verre1-((7*volume/14)*rho_gin) < (4*volume/14)*rho_liqueur_brandy && paverage()>poid_minimal){
       
       digitalWrite(PUMP14_IN1, LOW);       
       digitalWrite(PUMP14_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Liqueur d'abricot");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP14_IN1, LOW);       
-      digitalWrite(PUMP14_IN2, LOW);       
+      digitalWrite(PUMP14_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");       
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(0,165,200), 100);
       while(paverage()-verre1-((7*volume/14)*rho_gin)-((4*volume/14)*rho_liqueur_brandy) < (3*volume/14)*rho_orange && paverage()>poid_minimal){
       
       digitalWrite(PUMP9_IN1, LOW);       
       digitalWrite(PUMP9_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus d'orange");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP9_IN1, LOW);       
       digitalWrite(PUMP9_IN2, LOW);
-      
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
 
       Serial.println("Fermé3"); 
            
@@ -1326,7 +1488,7 @@ void LCDML_DISP_setup(LCDML_FUNC_LEMON_DROP_MARTINI)
        lcd.setCursor(0, 0);
        lcd.print("Lemon Drop Martini:");
        lcd.setCursor(0, 1);
-       lcd.print("5x Vodka,4x Cointreau");
+       lcd.print("5x Vodka,4x Cointr.");
        lcd.setCursor(0, 2);
        lcd.print("3x Lime");
        lcd.setCursor(0, 3);
@@ -1363,10 +1525,9 @@ void LCDML_DISP_loop(LCDML_FUNC_LEMON_DROP_MARTINI)
       lcd.print(volume);
       lcd.setCursor(3, 0);
       lcd.print("ml de  ");
-      lcd.setCursor(3, 1);
+      lcd.setCursor(0, 1);
       lcd.print("Lemon Drop Martini ");
-      lcd.setCursor(0, 2);
-      lcd.print("en preparation ");
+      
                  
       float verre1=paverage();
       pixels.Update();
@@ -1375,39 +1536,53 @@ void LCDML_DISP_loop(LCDML_FUNC_LEMON_DROP_MARTINI)
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Vodka");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP1_IN1, LOW);
       digitalWrite(PUMP1_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(0,165,200), 100);
       while(paverage()-verre1-((5*volume/12)*rho_vodka) < (4*volume/12)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");       
 
       Serial.println("Fermé2");
-      
+
+      pixels.TheaterChase(pixels.Color(255,255,0),pixels.Color(0,165,200), 100);
       while(paverage()-verre1-((5*volume/12)*rho_vodka)-((4*volume/12)*rho_cointreau) < (3*volume/12)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert3");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       
 
       Serial.println("Fermé3"); 
@@ -1483,37 +1658,50 @@ void LCDML_DISP_loop(LCDML_FUNC_SIDECAR)
                  
       float verre1=paverage();
       pixels.Update();
-      while(paverage()-verre1 < (1*volume/6)*rho_lime){
+      
+      while(paverage()-verre1 < (1*volume/6)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
-      digitalWrite(PUMP12_IN2, LOW);;
+      digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
-      while(paverage()-verre1-((1*volume/6)*rho_lime) < (1*volume/6)*rho_cointreau){
+
+      pixels.TheaterChase(pixels.Color(130,65,0),pixels.Color(133,70,240), 100);
+      while(paverage()-verre1-((1*volume/6)*rho_lime) < (1*volume/6)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       Serial.println("Ouvert");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");       
 
       Serial.println("Fermé2");
-      
-      while(paverage()-verre1-((1*volume/6)*rho_lime)-((1*volume/6)*rho_cointreau) < (4*volume/6)*rho_liqueur_brandy){
+
+      pixels.TheaterChase(pixels.Color(130,65,0),pixels.Color(133,70,240), 100);
+      while(paverage()-verre1-((1*volume/6)*rho_lime)-((1*volume/6)*rho_cointreau) < (4*volume/6)*rho_liqueur_brandy && paverage()>poid_minimal){
       
       digitalWrite(PUMP14_IN1, LOW);       
       digitalWrite(PUMP14_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Liqueur d'abricot");
       Serial.println("Ouvert3");
       pixels.Update();
     
@@ -1521,6 +1709,8 @@ void LCDML_DISP_loop(LCDML_FUNC_SIDECAR)
 
       digitalWrite(PUMP14_IN1, LOW);      
       digitalWrite(PUMP14_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       
 
       Serial.println("Fermé3"); 
@@ -1597,37 +1787,49 @@ void LCDML_DISP_loop(LCDML_FUNC_BETWEEN_THE_SHEETS)
                  
       float verre1=paverage();
       pixels.Update();
-      while(paverage()-verre1 < (1*volume/4)*rho_lime){
+      while(paverage()-verre1 < (1*volume/4)*rho_lime && paverage()>poid_minimal){
       
       digitalWrite(PUMP12_IN1, LOW);       
       digitalWrite(PUMP12_IN2, HIGH);
       Serial.println("Ouvert");
+      lcd.setCursor(0, 2);
+      lcd.print("Jus de citron");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP12_IN1, LOW);       
-      digitalWrite(PUMP12_IN2, LOW);;
+      digitalWrite(PUMP12_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       Serial.println("Fermé1");
-      
-      while(paverage()-verre1-((1*volume/4)*rho_lime) < (1*volume/4)*rho_cointreau){
+
+      pixels.TheaterChase(pixels.Color(40,130,80),pixels.Color(130,190,0), 240);
+      while(paverage()-verre1-((1*volume/4)*rho_lime) < (1*volume/4)*rho_cointreau && paverage()>poid_minimal){
       
       digitalWrite(PUMP4_IN1, LOW);
       digitalWrite(PUMP4_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Cointreau");
       Serial.println("Ouvert");
       pixels.Update();
     
       }
 
       digitalWrite(PUMP4_IN1, LOW);
-      digitalWrite(PUMP4_IN2, LOW);       
+      digitalWrite(PUMP4_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");       
 
       Serial.println("Fermé2");
-      
-      while(paverage()-verre1-((1*volume/4)*rho_lime)-((1*volume/4)*rho_cointreau) < (1*volume/4)*rho_liqueur_brandy){
+
+      pixels.TheaterChase(pixels.Color(40,130,80),pixels.Color(130,190,0), 240);
+      while(paverage()-verre1-((1*volume/4)*rho_lime)-((1*volume/4)*rho_cointreau) < (1*volume/4)*rho_liqueur_brandy && paverage()>poid_minimal){
       
       digitalWrite(PUMP14_IN1, LOW);       
       digitalWrite(PUMP14_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Liqueur d'abricot");
       Serial.println("Ouvert3");
       pixels.Update();
     
@@ -1635,20 +1837,27 @@ void LCDML_DISP_loop(LCDML_FUNC_BETWEEN_THE_SHEETS)
 
       digitalWrite(PUMP14_IN1, LOW);      
       digitalWrite(PUMP14_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
       
 
       Serial.println("Fermé3"); 
 
-      while(paverage()-verre1-((1*volume/4)*rho_lime)-((1*volume/4)*rho_cointreau)-((1*volume/4)*rho_liqueur_brandy) <(1*volume/4)*rho_rhum_blanc){
+      pixels.TheaterChase(pixels.Color(40,130,80),pixels.Color(130,190,0), 240);
+      while(paverage()-verre1-((1*volume/4)*rho_lime)-((1*volume/4)*rho_cointreau)-((1*volume/4)*rho_liqueur_brandy) <(1*volume/4)*rho_rhum_blanc && paverage()>poid_minimal){
       
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, HIGH);
+      lcd.setCursor(0, 2);
+      lcd.print("Rhum blanc");
       Serial.println("Ouvert4");
       pixels.Update();
     
       }
       digitalWrite(PUMP5_IN1, LOW);
       digitalWrite(PUMP5_IN2, LOW);
+      lcd.setCursor(0, 2);
+      lcd.print("                 ");
 
       Serial.println("Fermé4");
       boisson_prete();
