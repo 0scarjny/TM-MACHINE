@@ -1,15 +1,15 @@
 
 
 // ============================================================                                                            
-// TM_MACHINE_COCKTAIL_V1.1                          
+// TM_MACHINE_COCKTAIL_V1.2                          
 // ============================================================
 // Auteur:       Oscar Janossy
-// Dernière modification : 09.12.2019                                     
+// Dernière modification : 31.12.2019                                     
 // ============================================================ 
 // Descripton:  
 // Ce programme permet de faire fonctionner la machine à cocktail sur un Arduino Mega.
 // Le programme est basé sur la librairie facilitant la création de menus 
-// de Nils Feldkämper "LCDMenuLIB" publiée enOpenSource 3.0 à l'adresse : https://github.com/Jomelo/LCDMenuLib/tree/v2.3.5
+// de Nils Feldkämper "LCDMenuLIB" publiée en OpenSource 3.0 à l'adresse : https://github.com/Jomelo/LCDMenuLib/tree/v2.3.5
 
 // ============================================================ 
 
@@ -50,7 +50,7 @@
     {B10001, B10001, B10001, B10001, B10001, B10001, B11111, B11111}  // scrollbar bottom
   }; 
 
-  int total_cocktail =0; // nombres de cocktails fait
+
 
 // *********************************************************************
 // LCDML MENU/DISP
@@ -58,7 +58,7 @@
   // create menu
   // menu element count - last element id
   // this value must be the same as the last menu element
-  #define _LCDML_DISP_cnt    56
+  #define _LCDML_DISP_cnt    58
   
   // LCDML_root        => layer 0 
   // LCDML_root_X      => layer 1 
@@ -69,69 +69,71 @@
   // LCDMenuLib_add(id, group, prev_layer_element, new_element_num, lang_char_array, callback_function)
   LCDML_DISP_init(_LCDML_DISP_cnt);
   LCDML_DISP_add      (0  , _LCDML_G1  , LCDML_root        , 1  , "IBA Cocktails"        , LCDML_FUNC);
-  LCDML_DISP_add      (1  , _LCDML_G1  , LCDML_root_1      , 1  , "TEQUILA SUNRISE"      , TM_FUNC_TEQUILA_SUNRISE);
-  LCDML_DISP_add      (2  , _LCDML_G1  , LCDML_root_1      , 2  , "BACARDI"              , LCDML_FUNC_BACARDI);
-  LCDML_DISP_add      (3  , _LCDML_G1  , LCDML_root_1      , 3  , "MARGARITA"            , LCDML_FUNC_MARGARITA);
-  LCDML_DISP_add      (4  , _LCDML_G1  , LCDML_root_1      , 4  , "COSMOPOLITAN"         , LCDML_FUNC_COSMOPOLITAN);
-  LCDML_DISP_add      (5  , _LCDML_G1  , LCDML_root_1      , 5  , "SCREWDRIVER"          , LCDML_FUNC_SCREWDRIVER);
-  LCDML_DISP_add      (6  , _LCDML_G1  , LCDML_root_1      , 6  , "SEX ON THE BEACH"     , LCDML_FUNC_SEX_ON_THE_BEACH);
-  LCDML_DISP_add      (7  , _LCDML_G1  , LCDML_root_1      , 7  , "WHITE LADY"           , LCDML_FUNC_WHITE_LADY);
-  LCDML_DISP_add      (8  , _LCDML_G1  , LCDML_root_1      , 8  , "KAMIKAZE"             , LCDML_FUNC_KAMIKAZE);
-  LCDML_DISP_add      (9  , _LCDML_G1  , LCDML_root_1      , 9  , "CUBA LIBRE"           , LCDML_FUNC_CUBA_LIBRE);
-  LCDML_DISP_add      (10 , _LCDML_G1  , LCDML_root_1      , 10 , "LONG ISLAND TEA*"     , LCDML_FUNC_LONG_ISLAND_TEA);
-  LCDML_DISP_add      (11 , _LCDML_G1  , LCDML_root_1      , 11 , "PARADISE"             , LCDML_FUNC_PARADISE);
-  LCDML_DISP_add      (12 , _LCDML_G1  , LCDML_root_1      , 12 , "Lemon Drop Martini"   , LCDML_FUNC_LEMON_DROP_MARTINI);
-  LCDML_DISP_add      (42 , _LCDML_G1  , LCDML_root_1      , 13 , "SIDECAR"              , LCDML_FUNC_SIDECAR);
-  LCDML_DISP_add      (44 , _LCDML_G1  , LCDML_root_1      , 14 , "BETWEEN THE SHEETS"   , LCDML_FUNC_BETWEEN_THE_SHEETS);
-  LCDML_DISP_add      (13 , _LCDML_G1  , LCDML_root        , 2  , "Cocktails"            , LCDML_FUNC);
-  LCDML_DISP_add      (14 , _LCDML_G1  , LCDML_root_2      , 1  , "Blue Lagoon"          , LCDML_FUNC_BLUE_LAGOON);
-  LCDML_DISP_add      (15 , _LCDML_G1  , LCDML_root_2      , 2  , "Woo Woo"              , LCDML_FUNC_WOOWOO);
-  LCDML_DISP_add      (17 , _LCDML_G1  , LCDML_root_2      , 3  , "Belle Of St Mary's"   , LCDML_FUNC_BELLES);
-  LCDML_DISP_add      (18 , _LCDML_G1  , LCDML_root_2      , 4  , "Tojo"                 , LCDML_FUNC_TOJO);
-  LCDML_DISP_add      (19 , _LCDML_G1  , LCDML_root_2      , 5  , "Explorer"             , LCDML_FUNC_EXPLORER); 
-  LCDML_DISP_add      (20 , _LCDML_G1  , LCDML_root_2      , 6  , "Ink Martini"          , LCDML_FUNC_INK_MARTINI);
-  LCDML_DISP_add      (21 , _LCDML_G1  , LCDML_root_2      , 7  , "Ice Bear"             , LCDML_FUNC_ICE_BEAR);
-  LCDML_DISP_add      (22 , _LCDML_G1  , LCDML_root_2      , 8  , "Apricot"              , LCDML_FUNC_APRICOT);
-  LCDML_DISP_add      (23 , _LCDML_G1  , LCDML_root_2      , 9  , "Alelluia"             , LCDML_FUNC_ALELLUIA);
-  LCDML_DISP_add      (24 , _LCDML_G1  , LCDML_root_2      , 10 , "Barbados sunrise"     , LCDML_FUNC);
-  LCDML_DISP_add      (25 , _LCDML_G1  , LCDML_root_2      , 11 , "Cape Codder"          , LCDML_FUNC_CAPE_CODDER);
-  LCDML_DISP_add      (43 , _LCDML_G1  , LCDML_root_2      , 12 , "Blue Margarita"       , LCDML_FUNC_BLUE_MARGARITA);
-  LCDML_DISP_add      (45 , _LCDML_G1  , LCDML_root_2      , 13 , "Gimlet"               , LCDML_FUNC_GIMLET);
-  LCDML_DISP_add      (46 , _LCDML_G1  , LCDML_root_2      , 14 , "Orange Margarita"     , LCDML_FUNC_ORANGE_MARGARITA);
-  LCDML_DISP_add      (48 , _LCDML_G1  , LCDML_root_2      , 15 , "Blue Lady"            , LCDML_FUNC_BLUE_LADY);
-  LCDML_DISP_add      (49 , _LCDML_G1  , LCDML_root_2      , 16 , "Boston Sidecar"       , LCDML_FUNC_BOSTON_SIDECAR);
-  LCDML_DISP_add      (50 , _LCDML_G1  , LCDML_root_2      , 17 , "Blue Arrow"           , LCDML_FUNC_BLUE_ARROW);
-  LCDML_DISP_add      (51 , _LCDML_G1  , LCDML_root_2      , 18 , "Juicy"                , LCDML_FUNC_JUICY);
-  LCDML_DISP_add      (52 , _LCDML_G1  , LCDML_root_2      , 19 , "Lady Lyssna"          , LCDML_FUNC_LADY_LYSSNA);
-  LCDML_DISP_add      (26 , _LCDML_G1  , LCDML_root        , 3  , "Sans Alcool"          , LCDML_FUNC);
-  LCDML_DISP_add      (27 , _LCDML_G1  , LCDML_root_3      , 1  , "Coca-Cola"            , LCDML_FUNC_COKE);
-  LCDML_DISP_add      (28 , _LCDML_G1  , LCDML_root_3      , 2  , "Jus de Cranberry"     , LCDML_FUNC_CRANBERRY );
-  LCDML_DISP_add      (29 , _LCDML_G1  , LCDML_root_3      , 3  , "Jus d'orange"         , LCDML_FUNC_ORANGE );  
-  LCDML_DISP_add      (30 , _LCDML_G1  , LCDML_root_3      , 4  , "Sprite      "         , LCDML_FUNC_SPRITE );
-  LCDML_DISP_add      (31 , _LCDML_G1  , LCDML_root_3      , 5  , "Keep Sober"           , LCDML_FUNC_KEEP_SOBER);
-  LCDML_DISP_add      (47 , _LCDML_G1  , LCDML_root_3      , 6  , "Arabian Sun"          , LCDML_FUNC_ARABIAN_SUN); 
-  LCDML_DISP_add      (32 , _LCDML_G1  , LCDML_root        , 4  , "Shots simples"        , LCDML_FUNC);
-  LCDML_DISP_add      (33 , _LCDML_G1  , LCDML_root_4      , 1  , "Vodka"                , LCDML_FUNC_VODKA);
-  LCDML_DISP_add      (34 , _LCDML_G1  , LCDML_root_4      , 2  , "Curacao bleu"         , LCDML_FUNC_CURACAO);
-  LCDML_DISP_add      (35 , _LCDML_G1  , LCDML_root_4      , 3  , "Gin"                  , LCDML_FUNC_GIN);
-  LCDML_DISP_add      (36 , _LCDML_G1  , LCDML_root_4      , 4  , "Rhum blanc"           , LCDML_FUNC_RHUMBLANC);
-  LCDML_DISP_add      (37 , _LCDML_G1  , LCDML_root_4      , 5  , "Tequila"              , LCDML_FUNC_TEQUILA);
-  LCDML_DISP_add      (38 , _LCDML_G1  , LCDML_root_4      , 6  , "Cointreau"            , LCDML_FUNC_COINTREAU);
-  LCDML_DISP_add      (39 , _LCDML_G1  , LCDML_root_4      , 7  , "Liqueur de pêche"     , LCDML_FUNC_PECHE);
-  LCDML_DISP_add      (40 , _LCDML_G1  , LCDML_root_4      , 8  , "Abricot brandy"       , LCDML_FUNC_BRANDY);
-  LCDML_DISP_add      (16 , _LCDML_G1  , LCDML_root_4      , 9  , "Stop and Go Naked"    , LCDML_FUNC_STOP_AND_GO_NAKED);
-  LCDML_DISP_add      (53 , _LCDML_G1  , LCDML_root        , 5  , "Balance"              , LCDML_FUNC_BALANCE);
-  LCDML_DISP_add      (54 , _LCDML_G1  , LCDML_root        , 6  , "Nettoyage"            , LCDML_FUNC);
-  LCDML_DISP_add      (55 , _LCDML_G1  , LCDML_root_6      , 1  , "Recuparation"         , LCDML_FUNC_CLEAN_RECUP);
-  LCDML_DISP_add      (56 , _LCDML_G1  , LCDML_root_6      , 2  , "Nettoyage a eau"      , LCDML_FUNC_CLEAN_EAU);
-  LCDML_DISP_add      (41 , _LCDML_G7  , LCDML_root        , 7  , "initscreen"           , LCDML_FUNC_initscreen);
+  LCDML_DISP_add      (1  , _LCDML_G1  , LCDML_root_1      , 2  , "BACARDI"              , LCDML_FUNC_BACARDI);
+  LCDML_DISP_add      (2  , _LCDML_G1  , LCDML_root_1      , 3  , "BETWEEN THE SHEETS"   , LCDML_FUNC_BETWEEN_THE_SHEETS);
+  LCDML_DISP_add      (3  , _LCDML_G1  , LCDML_root_1      , 4  , "COSMOPOLITAN"         , LCDML_FUNC_COSMOPOLITAN);
+  LCDML_DISP_add      (4  , _LCDML_G1  , LCDML_root_1      , 5  , "CUBA LIBRE"           , LCDML_FUNC_CUBA_LIBRE);
+  LCDML_DISP_add      (5  , _LCDML_G1  , LCDML_root_1      , 6  , "KAMIKAZE"             , LCDML_FUNC_KAMIKAZE);
+  LCDML_DISP_add      (6  , _LCDML_G1  , LCDML_root_1      , 7  , "LEMON DROP MARTINI"   , LCDML_FUNC_LEMON_DROP_MARTINI);
+  LCDML_DISP_add      (7  , _LCDML_G1  , LCDML_root_1      , 8  , "LONG ISLAND TEA "     , LCDML_FUNC_LONG_ISLAND_TEA);
+  LCDML_DISP_add      (8  , _LCDML_G1  , LCDML_root_1      , 9  , "MARGARITA"            , LCDML_FUNC_MARGARITA);
+  LCDML_DISP_add      (9  , _LCDML_G1  , LCDML_root_1      , 10 , "PARADISE"             , LCDML_FUNC_PARADISE);
+  LCDML_DISP_add      (10 , _LCDML_G1  , LCDML_root_1      , 11 , "SCREWDRIVER"          , LCDML_FUNC_SCREWDRIVER);
+  LCDML_DISP_add      (11 , _LCDML_G1  , LCDML_root_1      , 12 , "SEX ON THE BEACH"     , LCDML_FUNC_SEX_ON_THE_BEACH);
+  LCDML_DISP_add      (12 , _LCDML_G1  , LCDML_root_1      , 13 , "SIDECAR"              , LCDML_FUNC_SIDECAR);  
+  LCDML_DISP_add      (13 , _LCDML_G1  , LCDML_root_1      , 14 , "TEQUILA SUNRISE"      , FUNC_TEQUILA_SUNRISE);  
+  LCDML_DISP_add      (14 , _LCDML_G1  , LCDML_root_1      , 15 , "WHITE LADY"           , LCDML_FUNC_WHITE_LADY);
+  LCDML_DISP_add      (15 , _LCDML_G1  , LCDML_root        , 2  , "Cocktails"            , LCDML_FUNC);
+  LCDML_DISP_add      (16 , _LCDML_G1  , LCDML_root_2      , 1  , "AMBER COOLER"         , LCDML_FUNC_AMBER_COOLER);
+  LCDML_DISP_add      (17 , _LCDML_G1  , LCDML_root_2      , 2  , "ALELLUIA"             , LCDML_FUNC_ALELLUIA);
+  LCDML_DISP_add      (18 , _LCDML_G1  , LCDML_root_2      , 3  , "APRICOT"              , LCDML_FUNC_APRICOT);
+  LCDML_DISP_add      (19 , _LCDML_G1  , LCDML_root_2      , 4  , "BELLE OF ST MARY'S"   , LCDML_FUNC_BELLES);
+  LCDML_DISP_add      (20 , _LCDML_G1  , LCDML_root_2      , 5  , "BLUE ARROW"           , LCDML_FUNC_BLUE_ARROW);
+  LCDML_DISP_add      (21 , _LCDML_G1  , LCDML_root_2      , 6  , "BLUE LADY"            , LCDML_FUNC_BLUE_LADY);
+  LCDML_DISP_add      (22 , _LCDML_G1  , LCDML_root_2      , 7  , "BLUE LAGOON"          , LCDML_FUNC_BLUE_LAGOON);    
+  LCDML_DISP_add      (23 , _LCDML_G1  , LCDML_root_2      , 8  , "BLUE MARGARITA"       , LCDML_FUNC_BLUE_MARGARITA);
+  LCDML_DISP_add      (24 , _LCDML_G1  , LCDML_root_2      , 9  , "BOSTON SIDECAR"       , LCDML_FUNC_BOSTON_SIDECAR);
+  LCDML_DISP_add      (25 , _LCDML_G1  , LCDML_root_2      , 10 , "CAPE CODDER"          , LCDML_FUNC_CAPE_CODDER);
+  LCDML_DISP_add      (26 , _LCDML_G1  , LCDML_root_2      , 11 , "EXPLORER"             , LCDML_FUNC_EXPLORER);
+  LCDML_DISP_add      (27 , _LCDML_G1  , LCDML_root_2      , 12 , "ICE BEAR"             , LCDML_FUNC_ICE_BEAR);
+  LCDML_DISP_add      (28 , _LCDML_G1  , LCDML_root_2      , 13 , "INK MARTINI"          , LCDML_FUNC_INK_MARTINI);
+  LCDML_DISP_add      (29 , _LCDML_G1  , LCDML_root_2      , 14 , "JUICY"                , LCDML_FUNC_JUICY);
+  LCDML_DISP_add      (30 , _LCDML_G1  , LCDML_root_2      , 15 , "GIMLET"               , LCDML_FUNC_GIMLET);
+  LCDML_DISP_add      (31 , _LCDML_G1  , LCDML_root_2      , 16 , "LADY LYSSNA"          , LCDML_FUNC_LADY_LYSSNA);
+  LCDML_DISP_add      (32 , _LCDML_G1  , LCDML_root_2      , 17 , "ORANGE MARGARITA"     , LCDML_FUNC_ORANGE_MARGARITA);
+  LCDML_DISP_add      (33 , _LCDML_G1  , LCDML_root_2      , 18 , "TOJO"                 , LCDML_FUNC_TOJO);
+  LCDML_DISP_add      (34 , _LCDML_G1  , LCDML_root_2      , 19 , "WOO WOO"              , LCDML_FUNC_WOOWOO);
+  LCDML_DISP_add      (35 , _LCDML_G1  , LCDML_root        , 3  , "Sans Alcool"          , LCDML_FUNC);
+  LCDML_DISP_add      (36 , _LCDML_G1  , LCDML_root_3      , 1  , "Coca-Cola"            , LCDML_FUNC_COKE);
+  LCDML_DISP_add      (37 , _LCDML_G1  , LCDML_root_3      , 2  , "Jus de Cranberry"     , LCDML_FUNC_CRANBERRY );
+  LCDML_DISP_add      (38 , _LCDML_G1  , LCDML_root_3      , 3  , "Jus d'orange"         , LCDML_FUNC_ORANGE );  
+  LCDML_DISP_add      (39 , _LCDML_G1  , LCDML_root_3      , 4  , "Sprite"               , LCDML_FUNC_SPRITE );
+  LCDML_DISP_add      (40 , _LCDML_G1  , LCDML_root_3      , 5  , "Keep Sober"           , LCDML_FUNC_KEEP_SOBER);
+  LCDML_DISP_add      (41 , _LCDML_G1  , LCDML_root_3      , 6  , "Arabian Sunrise"      , LCDML_FUNC_ARABIAN_SUN);
+  LCDML_DISP_add      (57 , _LCDML_G1  , LCDML_root_3      , 7  , "Jus de citron"        , LCDML_FUNC_LIME);
+  LCDML_DISP_add      (58 , _LCDML_G1  , LCDML_root_3      , 8  , "Sirop grenadine"      , LCDML_FUNC_GRENADINE); 
+  LCDML_DISP_add      (42 , _LCDML_G1  , LCDML_root        , 4  , "Shots"                , LCDML_FUNC);
+  LCDML_DISP_add      (43 , _LCDML_G1  , LCDML_root_4      , 1  , "Vodka"                , LCDML_FUNC_VODKA);
+  LCDML_DISP_add      (44 , _LCDML_G1  , LCDML_root_4      , 2  , "Curacao bleu"         , LCDML_FUNC_CURACAO);
+  LCDML_DISP_add      (45 , _LCDML_G1  , LCDML_root_4      , 3  , "Gin"                  , LCDML_FUNC_GIN);
+  LCDML_DISP_add      (46 , _LCDML_G1  , LCDML_root_4      , 4  , "Rhum blanc"           , LCDML_FUNC_RHUMBLANC);
+  LCDML_DISP_add      (47 , _LCDML_G1  , LCDML_root_4      , 5  , "Tequila"              , LCDML_FUNC_TEQUILA);
+  LCDML_DISP_add      (48 , _LCDML_G1  , LCDML_root_4      , 6  , "Cointreau"            , LCDML_FUNC_COINTREAU);
+  LCDML_DISP_add      (49 , _LCDML_G1  , LCDML_root_4      , 7  , "Liqueur de peche"     , LCDML_FUNC_PECHE);
+  LCDML_DISP_add      (50 , _LCDML_G1  , LCDML_root_4      , 8  , "Abricot brandy"       , LCDML_FUNC_BRANDY);
+  LCDML_DISP_add      (51 , _LCDML_G1  , LCDML_root_4      , 9  , "Stop and Go Naked"    , LCDML_FUNC_STOP_AND_GO_NAKED);
+  LCDML_DISP_add      (52 , _LCDML_G1  , LCDML_root        , 5  , "Balance"              , LCDML_FUNC_BALANCE);
+  LCDML_DISP_add      (53 , _LCDML_G1  , LCDML_root        , 6  , "Nettoyage"            , LCDML_FUNC);
+  LCDML_DISP_add      (54 , _LCDML_G1  , LCDML_root_6      , 1  , "RECUPERATION"         , LCDML_FUNC_CLEAN_RECUP);
+  LCDML_DISP_add      (55 , _LCDML_G1  , LCDML_root_6      , 2  , "NETTOYAGE A EAU"      , LCDML_FUNC_CLEAN_EAU);
+  LCDML_DISP_add      (56 , _LCDML_G7  , LCDML_root        , 7  , "initscreen"           , LCDML_FUNC_initscreen);
 
   LCDML_DISP_createMenu(_LCDML_DISP_cnt);
 
 
 
 // ********************************************************************* 
-// LCDML BACKEND (core of the menu, do not change here anything yet)
+// LCDML BACKEND (core of the menu)
 // ********************************************************************* 
   // define backend function  
   #define _LCDML_BACK_cnt    2  // last backend function id
@@ -153,6 +155,7 @@
   #define CLK  4
   
   const int poid_minimal =5;
+  
 // ********************************************************************* 
 // Ultrasonic sensor (setup)
 // https://www.makerguides.com/hc-sr04-arduino-tutorial/
@@ -161,42 +164,51 @@
     #define trigPin  5
     #define echoPin  6
     #define MAX_DISTANCE 350 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
+    
     NewPing sonar(trigPin, echoPin, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
+    
     float duration, distance;
-    const int distance_verre = 30; //profondeur de la plateforme
+    const int distance_verre =20; //DISTANCE DE DETECTION DU VERRE
+    
+// ********************************************************************* 
+// TIMER NETTOYAGE
+// *********************************************************************
+
+  unsigned long previousMillis = 0;        // will store last time LED was updated
+  const long interval = 1000;              // interval at which to blink (milliseconds)
 
 // ********************************************************************* 
 // PUMPS (setup)
 // *********************************************************************
 
-  #define PUMP1_IN1   45        //control pin for first motor   //  vodka
-  #define PUMP1_IN2   44        //control pin for first motor
-  #define PUMP2_IN1   46       //control pin for second motor   //  Gin
-  #define PUMP2_IN2   47       //control pin for second motor
-  #define PUMP3_IN1   30       //control pin for third motor    //  Curacao
-  #define PUMP3_IN2   31       //control pin for third motor
-  #define PUMP4_IN1   27       //control pin for fourth motor   //  Cointreau
-  #define PUMP4_IN2   26       //control pin for fourth motor
-  #define PUMP5_IN1   28       //control pin for fifth motor    //  Rhum blanc
-  #define PUMP5_IN2   29       //control pin for fifth motor
-  #define PUMP6_IN1   51       //control pin for sixth motor    //  Tequila
-  #define PUMP6_IN2   50       //control pin for sixth motor
-  #define PUMP7_IN1   36       //control pin for 7th motor      //  Coca-Cola
-  #define PUMP7_IN2   37       //control pin for 7th motor
-  #define PUMP8_IN1   48       //control pin for 8th motor      //  Jus de Cramberry
-  #define PUMP8_IN2   49       //control pin for 8th motor
-  #define PUMP9_IN1   24       //control pin for 9th motor      //  Jus d'orange
-  #define PUMP9_IN2   25       //control pin for 9th motor
-  #define PUMP10_IN1  42       //control pin for 10th motor     //  Sprite
-  #define PUMP10_IN2  43       //control pin for 10th motor
-  #define PUMP11_IN1  34       //control pin for 11th motor     //  Sirop Grenadine
-  #define PUMP11_IN2  35       //control pin for 11th motor
-  #define PUMP12_IN1  40       //control pin for 12th motor     //  Jus de citron
-  #define PUMP12_IN2  41       //control pin for 12th motor
-  #define PUMP13_IN1  38       //control pin for 13th motor     //  Liqueur de pêche
-  #define PUMP13_IN2  39       //control pin for 13th motor
-  #define PUMP14_IN1  50       //control pin for 14th motor     //  Liqueur d'abricot
-  #define PUMP14_IN2  51       //control pin for 14th motor
+  #define PUMP1_IN1   49        //control pin for first motor   //  vodka
+  #define PUMP1_IN2   48        //control pin for first motor
+  #define PUMP2_IN1   28       //control pin for second motor   //  Gin
+  #define PUMP2_IN2   29       //control pin for second motor
+  #define PUMP3_IN1   27       //control pin for third motor    //  Curacao
+  #define PUMP3_IN2   26       //control pin for third motor
+  #define PUMP4_IN1   45       //control pin for fourth motor   //  Cointreau
+  #define PUMP4_IN2   44       //control pin for fourth motor
+  #define PUMP5_IN1   30       //control pin for fifth motor    //  Rhum blanc
+  #define PUMP5_IN2   31       //control pin for fifth motor
+  #define PUMP6_IN1   47       //control pin for sixth motor    //  Tequila
+  #define PUMP6_IN2   46       //control pin for sixth motor
+  #define PUMP7_IN1   42       //control pin for 7th motor      //  Coca-Cola
+  #define PUMP7_IN2   43       //control pin for 7th motor
+  #define PUMP8_IN1   51       //control pin for 8th motor      //  Jus de Cramberry
+  #define PUMP8_IN2   50       //control pin for 8th motor
+  #define PUMP9_IN1   36       //control pin for 9th motor      //  Jus d'orange
+  #define PUMP9_IN2   37       //control pin for 9th motor
+  #define PUMP10_IN1  24       //control pin for 10th motor     //  Sprite
+  #define PUMP10_IN2  25       //control pin for 10th motor
+  #define PUMP11_IN1  32       //control pin for 11th motor     //  Sirop Grenadine
+  #define PUMP11_IN2  33       //control pin for 11th motor
+  #define PUMP12_IN1  34       //control pin for 12th motor     //  Jus de citron
+  #define PUMP12_IN2  35       //control pin for 12th motor
+  #define PUMP13_IN1  41       //control pin for 13th motor     //  Liqueur de pêche
+  #define PUMP13_IN2  40       //control pin for 13th motor
+  #define PUMP14_IN1  38       //control pin for 14th motor     //  Liqueur d'abricot
+  #define PUMP14_IN2  39       //control pin for 14th motor
 
 
 
@@ -208,18 +220,13 @@
 
    #define NUMPIXELS      65 // number of neopixels in strip    
     
- //  Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN_PIXEL, NEO_GRB + NEO_KHZ800);
 
    int delayval = 50; // timing delay in milliseconds
 
    int redColor   = 0;
    int greenColor = 0;
    int blueColor  = 0;
-   int redColor2   = 0;
-   int greenColor2 = 0;
-   int blueColor2  = 0;
-   int volume;
-   const int involontaire = 1000;
+
 
   // Pattern types supported:
 enum  pattern { NONE, RAINBOW_CYCLE, CLEARSTRIP, THEATER_CHASE };
@@ -488,7 +495,15 @@ void pixelsComplete()
     const float rho_grenadine = 1.18;
     const float rho_lime = 1;
     
-    
+// ********************************************************************* 
+// AUTRES 
+// *********************************************************************   
+      
+   int volume;     
+   
+   const int involontaire = 1000; // temps nécessaire pour éviter une action par inadvertance
+   int total_cocktail =0; // nombres de cocktails fait
+   signed short nombre =30; 
 // *********************************************************************
 // SETUP
 // *********************************************************************
@@ -496,7 +511,7 @@ void pixelsComplete()
   HX711 scale;
   void setup()
   { 
-    int total_cocktail =0; // nombres de cocktails fait
+    //int total_cocktail =0; // nombre de cocktails fait
     
       
     //PUMPS PINMODE
@@ -534,7 +549,7 @@ void pixelsComplete()
       
     // Initialize the NeoPixel library.
        pixels.begin();
-       pixels.setBrightness(200); // 1/3 brightness
+       pixels.setBrightness(60); // 1/4 brightness
        pixels.clear();
        pixels.show();
        
@@ -544,11 +559,11 @@ void pixelsComplete()
       lcd.setCursor(0, 0);
       lcd.print("COCKTAIL MACHINE");
       lcd.setCursor(0, 1);
-      lcd.print("V: 1.1");;
+      lcd.print("V: 1.2");;
       delay(1000);   
     
     
-    // serial init; only be needed if serial control is used   
+    // serial init;    
        Serial.begin(9600);                // start serial    
        Serial.println("DEBUT DU PROGRAMME"); // debut du programme
     
@@ -556,22 +571,28 @@ void pixelsComplete()
     //detection=digitalRead(capteur); // on lit la broche capteur
       duration = sonar.ping();
       distance = (duration / 2) * 0.0343;
+      
      // la sortie OUT du capteur est active sur niveau bas
-      while (distance<distance_verre) { // objet détecté = niveau 0 sur OUT capteur
+      while (distance<distance_verre) { // objet détecté = distance inférieure a la longueur de la plateforme
        
       duration = sonar.ping();
       distance = (duration / 2) * 0.0343;
 
        lcd.clear();
        lcd.setCursor(0, 0);
-       lcd.print("Put the glass"); 
-       lcd.setCursor(0, 1);
-       lcd.print("away");         
+       lcd.print("Enlever le verre");
+
+       setColorred();
        
-       Serial.println("ERROR");
+       Serial.println("ERREUR");
        delay(100);
+       pixels.clear();
+       pixels.show();
+       delay(100);
+       
       }
-      
+    delay(500); 
+    
     scale.begin(DOUT, CLK);
     scale.set_scale(calibration_factor); //This value is obtained by using the SparkFun_HX711_Calibration sketch
     scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
