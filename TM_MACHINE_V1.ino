@@ -512,7 +512,7 @@ void pixelsComplete()
   
   void setup()
   { 
-    //int total_cocktail =0; // nombre de cocktails fait
+  
     
       
     //PUMPS PINMODE
