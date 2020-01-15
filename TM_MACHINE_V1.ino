@@ -509,7 +509,7 @@ void pixelsComplete()
 // SETUP
 // *********************************************************************
   
-  HX711 scale;
+  
   void setup()
   { 
     //int total_cocktail =0; // nombre de cocktails fait
