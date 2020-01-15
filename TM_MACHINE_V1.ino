@@ -176,6 +176,7 @@
 
   unsigned long previousMillis = 0;        // will store last time LED was updated
   const long interval = 1000;              // interval at which to blink (milliseconds)
+  signed short nombre =30;
 
 // ********************************************************************* 
 // PUMPS (setup)
@@ -503,7 +504,7 @@ void pixelsComplete()
    
    const int involontaire = 1000; // temps nécessaire pour éviter une action par inadvertance
    int total_cocktail =0; // nombres de cocktails fait
-   signed short nombre =30; 
+   
 // *********************************************************************
 // SETUP
 // *********************************************************************
